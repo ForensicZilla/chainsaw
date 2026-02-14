@@ -4,7 +4,7 @@ use aho_corasick::{AhoCorasickBuilder, AhoCorasickKind};
 use serde::de;
 use serde_yaml::Value as Yaml;
 use tau_engine::core::parser::{
-    parse_identifier, BoolSym, Expression, IdentifierParser, MatchType, ModSym, Pattern, Search,
+    BoolSym, Expression, IdentifierParser, MatchType, ModSym, Pattern, Search, parse_identifier,
 };
 
 pub fn deserialize_expression<'de, D>(deserializer: D) -> Result<Expression, D::Error>

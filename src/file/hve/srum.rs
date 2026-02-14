@@ -1,8 +1,8 @@
 use anyhow::Context;
 use notatin::cell_key_node::CellKeyNode;
 use notatin::cell_value::CellValue;
-use serde_json::json;
 use serde_json::Value as Json;
+use serde_json::json;
 use std::path::Path;
 
 #[derive(Debug)]
@@ -107,9 +107,9 @@ impl super::Parser {
                 match key_value_content {
                     CellValue::Binary(reg_data) => {
                         extensions[&reg_value_uppercase][key_value.get_pretty_name()] =
-                            serde_json::to_value(reg_data).with_context(|| {
-                                "unable to store a binary entry from the SRUM registry values"
-                            })?;
+                            serde_json::to_value(reg_data).with_context(
+                                || "unable to store a binary entry from the SRUM registry values",
+                            )?;
                     }
                     CellValue::U32(reg_data) => {
                         extensions[&reg_value_uppercase][key_value.get_pretty_name()] =

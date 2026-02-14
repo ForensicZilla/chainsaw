@@ -70,8 +70,8 @@ impl Searchable for Json {
 pub mod lines {
     use super::*;
 
-    use std::io::prelude::*;
     use std::io::Lines;
+    use std::io::prelude::*;
 
     pub struct Parser {
         pub inner: Option<BufReader<File>>,

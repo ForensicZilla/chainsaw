@@ -4,8 +4,8 @@ use std::io::Read;
 use std::path::Path;
 
 use serde::{
-    de::{self, MapAccess, Visitor},
     Deserialize,
+    de::{self, MapAccess, Visitor},
 };
 use tau_engine::core::{
     optimiser,

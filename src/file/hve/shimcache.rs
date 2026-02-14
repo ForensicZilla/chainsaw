@@ -201,7 +201,9 @@ impl super::Parser {
                 .ok_or(anyhow!("Value \"PROCESSOR_ARCHITECTURE\" not found under key \"{environment_key_path}\" in shimcache!"))?.get_content().0;
                 let is_32bit = match processor_architecture_value {
                     notatin::cell_value::CellValue::String(s) => s == "x86",
-                    _ => bail!("Value \"PROCESSOR_ARCHITECTURE\" under key \"{environment_key_path}\" was not of type String in shimcache!")
+                    _ => bail!(
+                        "Value \"PROCESSOR_ARCHITECTURE\" under key \"{environment_key_path}\" was not of type String in shimcache!"
+                    ),
                 };
 
                 // Windows 7 32-bit
@@ -293,7 +295,7 @@ fn utf16_to_string(bytes: &[u8]) -> crate::Result<String> {
 }
 
 mod windows_10_cache {
-    use super::{utf16_to_string, CPUArchitecture, EntryType, ShimcacheEntry};
+    use super::{CPUArchitecture, EntryType, ShimcacheEntry, utf16_to_string};
 
     use lazy_static::lazy_static;
     use regex::Regex;
@@ -459,7 +461,7 @@ mod windows_10_cache {
 }
 
 mod windows7x64_windows2008r2_cache {
-    use super::{utf16_to_string, EntryType, InsertFlag, ShimcacheEntry};
+    use super::{EntryType, InsertFlag, ShimcacheEntry, utf16_to_string};
 
     use crate::file::win32_ts_to_datetime;
 
@@ -583,7 +585,7 @@ mod windows7x64_windows2008r2_cache {
 }
 
 mod windows7x86_cache {
-    use super::{utf16_to_string, EntryType, InsertFlag, ShimcacheEntry};
+    use super::{EntryType, InsertFlag, ShimcacheEntry, utf16_to_string};
 
     use crate::file::win32_ts_to_datetime;
 
@@ -705,7 +707,7 @@ mod windows7x86_cache {
 }
 
 mod windows8_cache {
-    use super::{utf16_to_string, EntryType, InsertFlag, ShimcacheEntry};
+    use super::{EntryType, InsertFlag, ShimcacheEntry, utf16_to_string};
 
     use crate::file::win32_ts_to_datetime;
 

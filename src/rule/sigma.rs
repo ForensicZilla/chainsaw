@@ -800,6 +800,8 @@ pub fn load(rule: &Path) -> Result<Vec<Yaml>> {
 
     let mut rules = vec![];
 
+    // TODO: Handle code reuse...
+
     // Sigma has this annoying feature called Rule Collections which makes parsing a PITA at the
     // cost of slightly better maintainability. I am not a fan but we have to handle it as best as
     // possible.
@@ -838,6 +840,34 @@ pub fn load(rule: &Path) -> Result<Vec<Yaml>> {
         }
     } else {
         single = true;
+
+        for sigma in sigma.into_iter() {
+            let base = match sigma.as_base() {
+                Some(base) => base,
+                None => bail!("failed to parse sigma rule"),
+            };
+            let mut rule = base;
+            if let Some(detection) = sigma.detection {
+                let (detection, agg) = prepare(detection, None)?;
+                let tau = detections_to_tau(detection)?;
+                if let Some(level) = &sigma.level {
+                    let level = match level.as_str() {
+                        "critical" | "high" | "medium" | "low" => level.to_owned(),
+                        _ => "info".to_owned(),
+                    };
+                    rule.insert("level".into(), level.into());
+                } else {
+                    rule.insert("level".into(), "info".into());
+                }
+                for (k, v) in tau {
+                    rule.insert(k, v);
+                }
+                if let Some(agg) = agg.and_then(|a| serde_yaml::to_value(a).ok()) {
+                    rule.insert(Yaml::String("aggregate".to_owned()), agg);
+                }
+                rules.push(rule.into());
+            }
+        }
     }
 
     if single {

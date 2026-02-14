@@ -632,7 +632,7 @@ fn run() -> Result<()> {
                     match load_rule(RuleKind::Sigma, &file, &kinds, &levels, &statuses) {
                         Ok(r) => {
                             if !r.is_empty() {
-                                count += 1;
+                                count += r.len();
                                 rs.extend(r)
                             }
                         }

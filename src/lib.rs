@@ -5,13 +5,13 @@ pub(crate) use anyhow::Result;
 
 pub use analyse::shimcache::ShimcacheAnalyser;
 pub use analyse::srum::SrumAnalyser;
-pub use file::{evtx, get_files, Document, Kind as FileKind, Reader};
+pub use file::{Document, Kind as FileKind, Reader, evtx, get_files};
 pub use hunt::{Hunter, HunterBuilder};
 pub use rule::{
-    lint, load, sigma, Filter, Kind as RuleKind, Level as RuleLevel, Status as RuleStatus,
+    Filter, Kind as RuleKind, Level as RuleLevel, Status as RuleStatus, lint, load, sigma,
 };
 pub use search::{Searcher, SearcherBuilder};
-pub use write::{set_writer, writer, Format, Writer};
+pub use write::{Format, Writer, set_writer, writer};
 
 #[macro_use]
 mod write;
