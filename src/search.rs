@@ -45,14 +45,9 @@ impl Iterator for Iter<'_> {
                     return Some(Err(e));
                 }
             };
-            if self.searcher.timestamp.is_some()
+            if let Some(ref field) = self.searcher.timestamp
                 && (self.searcher.from.is_some() || self.searcher.to.is_some())
             {
-                let field = self
-                    .searcher
-                    .timestamp
-                    .as_ref()
-                    .expect("could not get timestamp");
                 // TODO: Default to RFC 3339
                 let result = match &document {
                     Document::Evtx(evtx) => {

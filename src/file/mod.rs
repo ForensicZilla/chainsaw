@@ -412,8 +412,9 @@ impl Reader {
                     .map(|r| r.map(Document::Esedb)),
             )
                 as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
-            Parser::Unknown => Box::new(Unknown)
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
+            Parser::Unknown => {
+                Box::new(Unknown) as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>
+            }
         };
         Documents { iterator }
     }

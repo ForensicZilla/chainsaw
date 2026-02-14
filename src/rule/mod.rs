@@ -102,17 +102,12 @@ pub enum Filter {
     Expression(Expression),
 }
 
-#[derive(Clone, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Eq, Hash, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Kind {
+    #[default]
     Chainsaw,
     Sigma,
-}
-
-impl Default for Kind {
-    fn default() -> Self {
-        Self::Chainsaw
-    }
 }
 
 impl fmt::Display for Kind {
