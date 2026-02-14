@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Install Rust
@@ -26,7 +26,7 @@ jobs:
         run: cargo build --all --release --target x86_64-unknown-linux-gnu && strip
           target/x86_64-unknown-linux-gnu/release/chainsaw
       - name: Upload binary artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: linux-binary
           path: target/x86_64-unknown-linux-gnu/release/chainsaw
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Install Target
@@ -67,7 +67,7 @@ jobs:
           cargo build --all --release --target aarch64-unknown-linux-gnu && aarch64-linux-gnu-strip
           target/aarch64-unknown-linux-gnu/release/chainsaw
       - name: Upload binary artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: linux-binary-arm
           path: target/aarch64-unknown-linux-gnu/release/chainsaw
@@ -89,7 +89,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Install latest rust toolchain
@@ -101,7 +101,7 @@ jobs:
       - name: Build
         run: cargo build --all --release
       - name: Upload binary artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: win-binary
           path: target/release/chainsaw.exe
@@ -126,7 +126,7 @@ jobs:
     runs-on: macos-13
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Install latest rust toolchain
@@ -141,7 +141,7 @@ jobs:
       - name: Build for mac
         run: cargo build --all --release && strip target/release/chainsaw
       - name: Upload binary artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: mac-binary
           path: target/release/chainsaw
@@ -162,7 +162,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Install latest rust toolchain
@@ -177,7 +177,7 @@ jobs:
       - name: Build for mac
         run: cargo build --all --release && strip target/release/chainsaw
       - name: Upload binary artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: mac-binary-arm
           path: target/release/chainsaw
@@ -206,16 +206,16 @@ jobs:
       - name: Create artifacts directory
         run: mkdir chainsaw
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           path: ./chainsaw-root
       - name: Checkout Sigma Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           repository: SigmaHQ/sigma
           path: ./sigma
       - name: Checkout EVTX Samples Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           repository: sbousseaden/EVTX-ATTACK-SAMPLES
           path: ./EVTX-ATTACK-SAMPLES
