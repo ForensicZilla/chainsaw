@@ -32,7 +32,7 @@ pub enum Document {
 }
 
 pub struct Documents<'a> {
-    iterator: Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+    iterator: Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
 }
 
 #[derive(Clone, Debug, PartialEq, Deserialize, Serialize, Hash, Eq)]
@@ -389,17 +389,17 @@ impl Reader {
                     .parse()
                     .map(|r| r.map(Document::Evtx).map_err(|e| e.into())),
             )
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
             Parser::Hve(parser) => Box::new(parser.parse().map(|r| r.map(Document::Hve)))
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
             Parser::Json(parser) => Box::new(parser.parse().map(|r| r.map(Document::Json)))
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
             Parser::Jsonl(parser) => Box::new(parser.parse().map(|r| r.map(Document::Json)))
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
             Parser::Mft(parser) => Box::new(parser.parse().map(|r| r.map(Document::Mft)))
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
             Parser::Xml(parser) => Box::new(parser.parse().map(|r| r.map(Document::Xml)))
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
             Parser::Esedb(parser) => Box::new(
                 parser
                     .parse()
@@ -411,9 +411,9 @@ impl Reader {
                     })
                     .map(|r| r.map(Document::Esedb)),
             )
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
             Parser::Unknown => Box::new(Unknown)
-                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + Sync + 'a>,
+                as Box<dyn Iterator<Item = crate::Result<Document>> + Send + 'a>,
         };
         Documents { iterator }
     }
